@@ -25,17 +25,21 @@ export default function Saved() {
       <Text style={styles.uploadVideo}>Saved Video</Text>
       <View style={styles.box}>
         <Text style={styles.label}>Vidoe Title</Text>
-        <TextInput
-          placeholder="Give your video catchey title..."
-          placeholderTextColor={"#fff"}
-          style={styles.videoBox}
-        />
-        <AntDesign
-          name="search1"
-          size={20}
-          style={styles.search}
-          color={"#fff"}
-        />
+
+        <View style={styles.searchInput}>
+          <TextInput
+            placeholder="Give your video catchey title..."
+            placeholderTextColor={"#fff"}
+            style={styles.videoBox}
+          />
+          <AntDesign
+            name="search1"
+            size={20}
+            // style={styles.search}
+            style={{ position: "absolute", top: 15, right: 10 }}
+            color={"#fff"}
+          />
+        </View>
       </View>
       <FlatList
         data={saveds}
@@ -116,5 +120,12 @@ const styles = StyleSheet.create({
   avatarContainerBox: {
     flexDirection: "row",
     gap: 5,
+  },
+  searchInput: {
+    backgroundColor: "#1e1e2d",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    position: "relative",
+    color: "#fff"
   },
 });

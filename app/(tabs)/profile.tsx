@@ -27,17 +27,21 @@ export default function Profile() {
         <Text style={styles.march}>March result</Text>
         <Text style={styles.glasses}>VR glasses</Text>
       </View>
-      <TextInput
-        placeholder="VR glasses"
-        style={styles.input}
-        placeholderTextColor={"#fff"}
-      />
-      <AntDesign
-        name="search1"
-        size={20}
-        style={styles.search}
-        color={"#fff"}
-      />
+
+      <View style={styles.searchInput}>
+        <TextInput
+          placeholder="VR glasses"
+          style={styles.input}
+          placeholderTextColor={"#fff"}
+        />
+        <AntDesign
+          name="search1"
+          size={20}
+          style={{ position: "absolute", top: 15, right: 10 }}
+          color={"#fff"}
+        />
+      </View>
+
       <FlatList
         data={videos}
         showsVerticalScrollIndicator={false}
@@ -45,11 +49,11 @@ export default function Profile() {
           <View style={styles.arrayListContainer}>
             <View style={styles.topicContainer}>
               <View style={styles.avatarContainerBox}>
-              <Image source={item.headerImage} />
-              <View>
-                <Text style={styles.topic}>{item.topic}</Text>
-                <Text style={styles.subTopic}>{item.subTopic}</Text>
-              </View>
+                <Image source={item.headerImage} />
+                <View>
+                  <Text style={styles.topic}>{item.topic}</Text>
+                  <Text style={styles.subTopic}>{item.subTopic}</Text>
+                </View>
               </View>
               <Entypo name="dots-three-vertical" size={18} color={"#fff"} />
             </View>
@@ -117,5 +121,13 @@ const styles = StyleSheet.create({
   avatarContainerBox: {
     flexDirection: "row",
     gap: 5
-  }
+  },
+  searchInput: {
+    backgroundColor: "#1e1e2d",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    position: "relative",
+    color: "#fff",
+    marginBottom: 20
+  },
 });

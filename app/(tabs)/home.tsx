@@ -13,7 +13,8 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import { arrayList } from "@/data/items";
 import { carousel } from "@/data/carousel";
-import Animated, { interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from "react-native-reanimated" 
+import Animated, { useAnimatedScrollHandler, useScrollViewOffset, useSharedValue } from "react-native-reanimated"
+import SliderImage from "@/component/sliderImage";
 
 
 type ItemList = {
@@ -30,23 +31,6 @@ type Carousel = {
 };
 
 export default function Home() {
-  const scrollX = useSharedValue(0);
-  const onScrollHandler = useAnimatedScrollHandler({
-    onScroll: (e) => {
-      scrollX.value = e.contentOffset.x
-    }
-  })
-
-  const rnAnimatedStyle = useAnimatedStyle(()=> {
-    return (
-      trnasform: [
-        {
-          translateX: interpolate
-        }
-      ]
-    )
-  })
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,40 +41,27 @@ export default function Home() {
         </View>
         <Image source={require("../../assets/aoraImages/Group.png")} />
       </View>
-      <TextInput
-        placeholder="Search for a video topic"
-        style={styles.input}
-        placeholderTextColor={"#fff"}
-      />
-      <AntDesign
-        name="search1"
-        size={20}
-        style={styles.search}
-        color={"#fff"}
-      />
+      <View style={styles.searchInput}>
+        <TextInput
+          placeholder="Search for a video topic"
+          style={styles.input}
+          placeholderTextColor={"#fff"}
+        />
+        <AntDesign
+          name="search1"
+          size={20}
+          style={{ position: "absolute", top: 15, right: 10, borderWidth: 1, borderColor: "red" }}
+          color={"#fff"}
+        />
+      </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.trending}>Treding Videos</Text>
-        <Animated.FlatList
-          data={carousel}
-          contentContainerStyle={{ height: 285, gap: 10, borderRadius: 10, marginBottom: 10 }}
-          // keyExtractor={({item}: {item: Carousel}) => item.id}
-          horizontal
-          pagingEnabled
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }: { item: Carousel }) => (
-            <View style={styles.trendingImage}>
-              <Image
-                source={item.image}
-                resizeMode="cover"
-                style={{ height: 285, width: 179, borderRadius: 10 }}
-              />
-              </View>
-          )}
-        />
+        <SliderImage />
         <FlatList
           showsVerticalScrollIndicator={false}
           data={arrayList}
+          contentContainerStyle={{ paddingBottom: 50 }}
           renderItem={({ item }: { item: ItemList }) => (
             <View style={styles.arrayListContainer}>
               <View style={styles.topicContainer}>
@@ -139,11 +110,11 @@ const styles = StyleSheet.create({
   },
   input: {
     color: "#fff",
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
     alignItems: "center",
-    backgroundColor: "#1e1e2d",
-    width: "100%",
-    height: 58,
+    // backgroundColor: "#1e1e2d",
+    width: "90%",
+    height: 45,
     borderRadius: 10
   },
   search: {
@@ -152,6 +123,7 @@ const styles = StyleSheet.create({
     left: 300,
   },
   arrayListContainer: {
+    marginTop: 10,
     gap: 10,
     // justifyContent: "space-between"
     paddingHorizontal: 10,
@@ -180,6 +152,13 @@ const styles = StyleSheet.create({
   avatarContentBox: {
     flexDirection: "row",
     gap: 5
-  }
+  },
+  searchInput: {
+    backgroundColor: "#1e1e2d",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    position: "relative",
+    // color: "#fff"
+  },
 
 });

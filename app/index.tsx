@@ -41,7 +41,7 @@ export default function Onboarding() {
         </View>
       </View>
       <View style={styles.boxContainer}>
-        <Link href={"/signup"}>
+        <Link href={"/(auth)/signup"}>
         <Text style={styles.boxText}>Continue with Email</Text>
         </Link>
       </View>
