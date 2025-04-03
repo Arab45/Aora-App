@@ -25,8 +25,8 @@ const signInSchema = Yup.object().shape({
     .min(8)
     .required("Please enter your password.")
     .matches(
-      /^(?=.*?^[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^*+-]).{8,}$/,
-      "must contain minimum 8 characters, at least one uppercase letter"
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*+-]).{8,}$/,
+      "Must contain at least one uppercase letter, one number, and one special character"
     ),
 });
 
@@ -52,14 +52,19 @@ export default function Login() {
 				password: data.password
 			});
 
-			// This indicates the user is signed in
-			await setActive({ session: completeSignIn.createdSessionId });
+      if (completeSignIn.createdSessionId) {
+        await setActive({ session: completeSignIn.createdSessionId });
+        router.push("/home");  // Redirect only if sign-in is successful
+      } else {
+        throw new Error("Session creation failed. Please try again.");
+      }
 		} catch (err: any) {
-			alert(err.errors[0].message);
+      console.error("Clerk Signup Error:", err);
+			alert(err.errors?.[0]?.message ?? "Invalid credentials.");
 		} finally {
 			setIsLoading(false);
 		}
-    router.push("/home");
+    // router.push("/home");
   };
 
   // console.log(handlePress());

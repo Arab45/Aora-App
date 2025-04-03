@@ -57,7 +57,7 @@ export default function SliderImage() {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <Animated.FlatList
-                contentContainerStyle={{ height: 285, gap: 10, borderRadius: 10, marginBottom: 10 }}
+                contentContainerStyle={{ height: 285, alignItems: "center", borderRadius: 10, marginBottom: 10 }}
                 decelerationRate="fast" // Smooth scrolling
                 snapToInterval={width} // Ensures snapping
                 snapToAlignment="center"

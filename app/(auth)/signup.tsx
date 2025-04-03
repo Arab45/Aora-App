@@ -28,7 +28,7 @@ const signUpSchema = Yup.object().shape({
     .min(8, "Password must be at least 8 characters")
     .required("Please enter your password.")
     .matches(
-      /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^*+-]).{8,}$/,
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.*[#?!@$%^&*+-]).{8,}$/,
       "Must contain at least one uppercase letter, one number, and one special character"
     ),
 });
@@ -56,13 +56,15 @@ export default function SignUp() {
         password: values.password,
       });
 
-      // Set user as active session
-      await setActive({ session: result.createdSessionId });
+      console.log("my result are:", result);
+
+      alert("Account created successfully! Please log in.");
 
       // Navigate to home page after successful signup
-      router.push("/home");
+      router.push("/login");
     } catch (error: any) {
-      alert(error.errors[0].message);
+      console.error("Clerk Signup Error:", error);
+      alert(error.errors?.[0]?.message ?? "Sign up failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
