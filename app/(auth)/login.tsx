@@ -41,16 +41,17 @@ export default function Login() {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const handlePress = async (data: any) => {
+  const handlePress = async (values: any) => {
     if (!isLoaded) {
 			return;
 		}
 		setIsLoading(true);
 		try {
 			const completeSignIn = await signIn?.create({
-				identifier: data.email,
-				password: data.password
+				identifier: values.email,
+				password: values.password
 			});
+      console.log(completeSignIn);
 
       if (completeSignIn.createdSessionId) {
         await setActive({ session: completeSignIn.createdSessionId });
