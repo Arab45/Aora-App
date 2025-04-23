@@ -1,8 +1,16 @@
 import { Stack } from "expo-router";
 import * as SecureStore from 'expo-secure-store';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import Constants from 'expo-constants';
 
-const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+type AppConfig = {
+	CLERK_PUBLISHABLE_KEY: string;
+  };
+  
+  const config = Constants.expoConfig?.extra as AppConfig;
+  
+  const CLERK_PUBLISHABLE_KEY = config?.CLERK_PUBLISHABLE_KEY ?? '';
+  
 
 console.log("Clerk Publishable Key:", CLERK_PUBLISHABLE_KEY);
 
