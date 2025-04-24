@@ -65,7 +65,7 @@ export default function Login() {
         throw new Error("Session creation failed. Please try again.");
       }
 		} catch (err: any) {
-      console.error("Clerk Signup Error:", err);
+      // console.error("Clerk Signup Error:", err);
 			alert(err.errors?.[0]?.message ?? "Invalid credentials.");
 		} finally {
 			setIsLoading(false);

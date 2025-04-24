@@ -39,7 +39,7 @@ export default function Pagination({ items, paginationIndex, scrollX }: Prop) {
                         style={[
                         styles.dot, 
                         pgAnimationStyle,
-                        { backgroundColor: paginationIndex === index ? '#222' : '#aaa' }
+                        { backgroundColor: paginationIndex === index ? '#222' : '#fe9f00' }
                         ]}
                     />
                 )

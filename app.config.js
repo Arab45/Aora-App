@@ -18,6 +18,10 @@ export default () => ({
       adaptiveIcon: {
         foregroundImage: "./assets/aoraImages/logo.png",
         backgroundColor: "#161622"
+      },
+      statusBar: {
+        barStyle: "light-content",
+        backgroundColor: "#161622"
       }
     },
     web: {
@@ -44,5 +48,6 @@ export default () => ({
     extra: {
       CLERK_PUBLISHABLE_KEY: process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
     }
-  }
+  },
+  
 });

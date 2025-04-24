@@ -15,6 +15,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useSignUp } from "@clerk/clerk-expo";
 import { Button } from "react-native";
+import { useAuth } from "@clerk/clerk-expo";
+
 
 
 // Validation Schema using Yup
@@ -42,6 +44,7 @@ export default function SignUp() {
   const [code, setCode] = useState('');
   const router = useRouter();
   const { isLoaded, signUp, setActive } = useSignUp();
+  const { signOut } = useAuth();
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
@@ -55,7 +58,10 @@ export default function SignUp() {
     console.log("my valuues are:", values);
 
     try {
-      
+
+    // 👇 Sign out first (if in single session mode)
+    await signOut();
+
       // Create user with Clerk
       const result = await signUp.create({
         emailAddress: values.email,
@@ -79,7 +85,7 @@ export default function SignUp() {
       // Navigate to home page after successful signup
       // router.push("/login");
     } catch (error: any) {
-      console.error("Clerk Signup Error:", error);
+      // console.error("Clerk Signup Error:", error);
       alert(error.errors?.[0]?.message ?? "Sign up failed. Please try again.");
     } finally {
       setIsLoading(false);
@@ -217,7 +223,7 @@ export default function SignUp() {
 
       {pendingVerification && (
         <>
-          <View style={{alignItems: "center", justifyContent: "center", paddingHorizontal: 20}}>
+          <View style={styles.centeredContainer}>
             <TextInput
               value={code}
               placeholder="Code..."
@@ -306,5 +312,13 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 10,
     backgroundColor: '#fff'
+  },
+  centeredContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 32,
+    backgroundColor: '#161622',
+    gap: 16,
   },
 });

@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   FlatList,
+  StatusBar
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -23,6 +24,10 @@ type ItemList = {
 export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar 
+  barStyle="dark-content"   // 'light-content' for white icons, 'dark-content' for dark
+  backgroundColor="#fff"  // Sets background color for Android
+/>
       <View style={styles.welcomeCon}>
         <View style={styles.welcomeText}>
           <Text style={styles.welcome}>Welcome back</Text>
