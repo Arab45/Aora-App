@@ -13,7 +13,7 @@ import { Link, useRouter } from "expo-router";
 import Icon from "@expo/vector-icons/Ionicons";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useSignIn } from '@clerk/clerk-expo';
+import { useSignIn, useAuth } from '@clerk/clerk-expo';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 
@@ -36,6 +36,8 @@ export default function Login() {
   const router = useRouter();
   const { signIn, setActive, isLoaded } = useSignIn();
 
+  const { signOut, isSignedIn } = useAuth();
+
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -47,6 +49,9 @@ export default function Login() {
 		}
 		setIsLoading(true);
 		try {
+      if (isSignedIn) {
+        await signOut();
+      }
 			const completeSignIn = await signIn?.create({
 				identifier: values.email,
 				password: values.password

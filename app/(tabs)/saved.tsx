@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#161622",
     paddingHorizontal: 20,
     gap: 20,
+    paddingTop: 20
   },
   uploadVideo: {
     marginTop: 20,

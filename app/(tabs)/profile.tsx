@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#161622",
     paddingRight: 20,
-    paddingLeft: 20
+    paddingLeft: 20,
+    paddingTop: 20
     // gap: 20,
   },
   header: {

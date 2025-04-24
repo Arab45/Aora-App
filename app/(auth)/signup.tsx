@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import { useSignUp } from "@clerk/clerk-expo";
 import { Button } from "react-native";
 
+
 // Validation Schema using Yup
 const signUpSchema = Yup.object().shape({
   username: Yup.string()
@@ -54,6 +55,7 @@ export default function SignUp() {
     console.log("my valuues are:", values);
 
     try {
+      
       // Create user with Clerk
       const result = await signUp.create({
         emailAddress: values.email,
